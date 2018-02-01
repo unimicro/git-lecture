@@ -4,19 +4,22 @@ pipeline {
     agent any
 
     stages {
+        stage('Setup') {
+            steps {
+                echo 'Setup...'
+                bat 'yarn install'
+            }
+        }
         stage('Build') {
             steps {
-                echo 'Building..'
+                echo 'Build...'
+                bat 'yarn build.dev'
             }
         }
-        stage('Test') {
+        stage('Package') {
             steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
+                echo 'Package...'
+                bat 'yarn zip-dist'
             }
         }
     }
